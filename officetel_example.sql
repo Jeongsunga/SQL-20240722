@@ -54,6 +54,25 @@ INSERT INTO user(id, password, email) VALUES('qwer1234', 'qwer1234', 'qwer1234@q
 -- 게시물 리스트
 SELECT receipt_number, status, title, writer_id, write_date, view_count
 FROM board
-WHERE title Like '%:title%'
+WHERE title Like '%열%' -- %:title%
 ORDER BY receipt_number DESC
-LIMIT 10;
+LIMIT 0, 10; -- (:page_number - 1) * 10
+
+-- 게시물 작성
+INSERT INTO board (title, contents, writer_id) VALUES ('열두 번째 게시물', '안녕하세요', 'qwer1234');
+
+-- 게시물 상세보기
+UPDATE board SET view_count = view_count + 1 WHERE receipt_number = 1;
+
+SELECT receipt_number, title, writer_id, write_date, view_count, contents, reply
+FROM board
+WHERE receipt_number = 1;
+
+-- 답글 작성
+UPDATE board SET reply = '반갑습니다.', status = true WHERE receipt_number = 1;
+
+-- 게시물 수정
+UPDATE board SET title = '게시물 수정', contents = '안녕하세요' WHERE receipt_number = 1;
+
+-- 게시물 삭제
+DELETE FROM board WHERE receipt_number = 1;
