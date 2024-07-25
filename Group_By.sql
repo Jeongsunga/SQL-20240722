@@ -83,6 +83,7 @@ SELECT
 	AVG(amount) '평균', 
 	employee_number '사번'
 FROM sale
-GROUP BY employee_number
-HAVING date < '2024-07-05';
+where date < '2024-07-05'
+GROUP BY employee_number;
+
 
